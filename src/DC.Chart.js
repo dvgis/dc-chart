@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-03 15:59:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-03 16:57:16
+ * @Last Modified time: 2020-02-03 17:41:35
  */
 DC.Chart = class {
   constructor(id, option) {
@@ -48,6 +48,6 @@ DC.Chart = class {
 
   setOption(option) {
     this._option = option
-    this._chart.setOption(this._option)
+    this._chart && this._chart.setOption(this._option)
   }
 }
