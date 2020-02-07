@@ -2,16 +2,16 @@
  * @Author: Caven
  * @Date: 2020-02-03 15:59:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-03 17:41:35
+ * @Last Modified time: 2020-02-03 18:23:25
  */
 DC.Chart = class {
   constructor(id, option) {
-    this._viewer = undefined
     this._id = id || DC.Util.uuid()
     this._option = option
     this._wapper = DC.DomUtil.create('div', 'dc-chart')
     this._setWapperStyle()
     this._chart = undefined
+    this._state = 'initialized'
   }
 
   get chart() {
@@ -33,21 +33,24 @@ DC.Chart = class {
   }
 
   install(viewer) {
-    this._viewer = viewer
-    this._viewer.dcContainer.appendChild(this._wapper)
-    this._wapper.style.width = this._viewer.canvas.width + 'px'
-    this._wapper.style.height = this._viewer.canvas.height + 'px'
-    if (echarts) {
-      echarts.viewer = viewer
-      this._chart = echarts.init(this._wapper)
-      if (this._option) {
-        this._chart.setOption(this._option)
+    if (viewer && this._state !== 'installed') {
+      viewer.dcContainer.appendChild(this._wapper)
+      this._wapper.style.width = viewer.canvas.width + 'px'
+      this._wapper.style.height = viewer.canvas.height + 'px'
+      if (echarts) {
+        echarts.viewer = viewer
+        this._chart = echarts.init(this._wapper)
+        if (this._option) {
+          this._chart.setOption(this._option)
+        }
       }
+      this._state = 'installed'
     }
   }
 
   setOption(option) {
     this._option = option
     this._chart && this._chart.setOption(this._option)
+    return this
   }
 }
