@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-03 16:34:40
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-03 16:38:06
+ * @Last Modified time: 2020-05-07 12:45:05
  */
 export default echarts.extendComponentView({
   type: 'GLMap',

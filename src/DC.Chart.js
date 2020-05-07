@@ -2,16 +2,17 @@
  * @Author: Caven
  * @Date: 2020-02-03 15:59:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-03 18:23:25
+ * @Last Modified time: 2020-05-07 12:44:44
  */
 DC.Chart = class {
   constructor(id, option) {
     this._id = id || DC.Util.uuid()
     this._option = option
-    this._wapper = DC.DomUtil.create('div', 'dc-chart')
+    this._wrapper = DC.DomUtil.create('div', 'dc-chart')
     this._setWapperStyle()
     this._chart = undefined
     this._state = 'initialized'
+    this._show = false
   }
 
   get chart() {
@@ -19,27 +20,33 @@ DC.Chart = class {
   }
 
   set show(show) {
-    if (this._wapper) {
-      this._wapper.style.visibility = show ? 'visible' : 'hidden'
+    this._show = show
+    if (this._wrapper) {
+      this._wrapper.style.visibility = show ? 'visible' : 'hidden'
     }
   }
 
+  get show() {
+    return this._show
+  }
+
   _setWapperStyle() {
-    this._wapper.style.position = 'absolute'
-    this._wapper.style.top = '0px'
-    this._wapper.style.left = '0px'
-    this._wapper.style.pointerEvents = 'none'
-    this._wapper.setAttribute('id', this._id)
+    this._wrapper.style.position = 'absolute'
+    this._wrapper.style.top = '0px'
+    this._wrapper.style.left = '0px'
+    this._wrapper.style.pointerEvents = 'none'
+    this._wrapper.setAttribute('id', this._id)
   }
 
   install(viewer) {
     if (viewer && this._state !== 'installed') {
-      viewer.dcContainer.appendChild(this._wapper)
-      this._wapper.style.width = viewer.canvas.width + 'px'
-      this._wapper.style.height = viewer.canvas.height + 'px'
+      viewer.dcContainer.appendChild(this._wrapper)
+      this._wrapper.style.width = viewer.canvas.width + 'px'
+      this._wrapper.style.height = viewer.canvas.height + 'px'
       if (echarts) {
         echarts.viewer = viewer
-        this._chart = echarts.init(this._wapper)
+        viewer.delegate.scene.canvas.setAttribute('tabIndex', 0)
+        this._chart = echarts.init(this._wrapper)
         if (this._option) {
           this._chart.setOption(this._option)
         }

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-03 16:21:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-03 16:38:10
+ * @Last Modified time: 2020-05-07 12:45:07
  */
 class CoordinateSystem {
   constructor(viewer, api) {
@@ -28,10 +28,7 @@ class CoordinateSystem {
     if (!cartesian3) {
       return result
     }
-    if (
-      scene.mode === DC.SceneMode.SCENE3D &&
-      DC.Cartesian3.angleBetween(scene.camera.position, cartesian3) > DC.Math.toRadians(80)
-    ) {
+    if (scene.mode === DC.SceneMode.SCENE3D && DC.Cartesian3.angleBetween(scene.camera.position, cartesian3) > DC.Math.toRadians(80)) {
       return false
     }
     var coords = scene.cartesianToCanvasCoordinates(cartesian3)
