@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-03 15:59:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-07 12:44:44
+ * @Last Modified time: 2020-07-17 14:52:10
  */
 DC.Chart = class {
   constructor(id, option) {
@@ -12,7 +12,7 @@ DC.Chart = class {
     this._setWapperStyle()
     this._chart = undefined
     this._state = 'initialized'
-    this._show = false
+    this._show = true
   }
 
   get chart() {
@@ -51,6 +51,7 @@ DC.Chart = class {
           this._chart.setOption(this._option)
         }
       }
+
       this._state = 'installed'
     }
   }
