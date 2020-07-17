@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "main": "index.js",
   "repository": "https://github.com/Digital-Visual/dc-chart.git",
-  "homepage": "http://www.dvgis.cn",
+  "homepage": "https://www.dvgis.cn",
   "author": "Caven Chen",
   "license": "Apache 2.0",
   "scripts": {
