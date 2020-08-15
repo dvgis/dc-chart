@@ -1,17 +1,23 @@
-/*
+/**
  * @Author: Caven
- * @Date: 2020-02-03 15:55:53
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-07 12:47:58
+ * @Date: 2020-02-02 15:55:53
  */
 
 const install = function(DC) {
-  if (!DC && !echarts && !DC.ready) {
-    throw new Error('missing dc sdk or echarts lib')
+  if (!echarts) {
+    throw new Error('Chart: missing charts lib')
   }
+
+  if (!DC || !DC.init) {
+    throw new Error('Chart: Missing DC Base')
+  }
+
+  if (!DC.ready) {
+    throw new Error('Chart: Missing DC Core')
+  }
+
   DC.init(() => {
-    require('./extension/index')
-    require('./DC.Chart')
+    require('./Chart.Loader')
   })
 }
 

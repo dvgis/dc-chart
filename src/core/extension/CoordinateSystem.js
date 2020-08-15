@@ -1,13 +1,12 @@
-/*
+/**
  * @Author: Caven
- * @Date: 2020-02-03 16:21:35
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-07 12:45:07
+ * @Date: 2020-02-02 16:21:35
  */
+
 class CoordinateSystem {
   constructor(viewer, api) {
     this._viewer = viewer
-    this.dimensions = ['lng', 'lat']
+    this._dimensions = ['lng', 'lat']
     this._mapOffset = [0, 0]
     this._api = api
   }
@@ -31,7 +30,7 @@ class CoordinateSystem {
     if (scene.mode === DC.SceneMode.SCENE3D && DC.Cartesian3.angleBetween(scene.camera.position, cartesian3) > DC.Math.toRadians(80)) {
       return false
     }
-    var coords = scene.cartesianToCanvasCoordinates(cartesian3)
+    let coords = scene.cartesianToCanvasCoordinates(cartesian3)
     if (!coords) {
       return result
     }
@@ -39,9 +38,9 @@ class CoordinateSystem {
   }
 
   pointToData(point) {
-    var ellipsoid = this._viewer.scene.globe.ellipsoid
-    var cartesian3 = new DC.Cartesian3(point[0] + this._mapOffset[0], point[1] + this._mapOffset[1], 0)
-    var cartographic = ellipsoid.cartesianToCartographic(cartesian3)
+    let ellipsoid = this._viewer.scene.globe.ellipsoid
+    let cartesian3 = new DC.Cartesian3(point[0] + this._mapOffset[0], point[1] + this._mapOffset[1], 0)
+    let cartographic = ellipsoid.cartesianToCartographic(cartesian3)
     return [DC.Math.toDegrees(cartographic.longitude), DC.Math.toDegrees(cartographic.latitude)]
   }
 
@@ -52,6 +51,10 @@ class CoordinateSystem {
 
   getRoamTransform() {
     return echarts.matrix.create()
+  }
+
+  get dimensions() {
+    return this._dimensions
   }
 
   static get dimensions() {

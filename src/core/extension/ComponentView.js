@@ -1,9 +1,8 @@
-/*
+/**
  * @Author: Caven
- * @Date: 2020-02-03 16:34:40
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-07 12:45:05
+ * @Date: 2020-02-02 16:34:40
  */
+
 export default echarts.extendComponentView({
   type: 'GLMap',
   init: function(ecModel, api) {

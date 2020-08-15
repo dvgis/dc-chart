@@ -1,15 +1,14 @@
-/*
+/**
  * @Author: Caven
- * @Date: 2020-02-03 15:59:37
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-17 14:52:10
+ * @Date: 2020-02-02 15:59:37
  */
-DC.Chart = class {
+
+class Chart {
   constructor(id, option) {
     this._id = id || DC.Util.uuid()
     this._option = option
     this._wrapper = DC.DomUtil.create('div', 'dc-chart')
-    this._setWapperStyle()
+    this._setWrapperStyle()
     this._chart = undefined
     this._state = 'initialized'
     this._show = true
@@ -30,7 +29,7 @@ DC.Chart = class {
     return this._show
   }
 
-  _setWapperStyle() {
+  _setWrapperStyle() {
     this._wrapper.style.position = 'absolute'
     this._wrapper.style.top = '0px'
     this._wrapper.style.left = '0px'
@@ -62,3 +61,5 @@ DC.Chart = class {
     return this
   }
 }
+
+export default Chart
