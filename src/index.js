@@ -26,6 +26,6 @@ if (typeof window !== 'undefined' && window.DC) {
   install(window.DC)
 }
 
-module.exports = {
+export default {
   install
 }
