@@ -43,9 +43,9 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 
 ```js
 global.echarts = require('echarts') //Echarts包
-import 'dvgis/dc-sdk/dist/dc.base.min' //基础包
-import 'dvgis/dc-sdk/dist/dc.core.min' //核心包
-import 'dvgis/dc-chart/dist/dc.chart.min' //图表包
+import DC from 'dvgis/dc-sdk/dist/dc.base.min' //基础包
+import DcCore from 'dvgis/dc-sdk/dist/dc.core.min' //核心包
+import DcChart from  'dvgis/dc-chart/dist/dc.chart.min' //图表包
 import 'dvgis/dc-sdk/dist/dc.core.min.css' //主要样式
 ```
 
@@ -81,6 +81,8 @@ module.exports = {
 ## 开始
 
 ```js
+DC.use(DcCore)
+DC.use(DcChart)
 DC.ready(() => {
   let viewer = new DC.Viewer(divId) // divId 为一个div节点的Id属性值，如果不传入，会无法初始化3D场景
 })

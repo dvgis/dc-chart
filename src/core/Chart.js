@@ -3,14 +3,16 @@
  * @Date: 2020-02-02 15:59:37
  */
 
+const { State, DomUtil, Util } = DC
+
 class Chart {
   constructor(id, option) {
-    this._id = id || DC.Util.uuid()
+    this._id = id || Util.uuid()
     this._option = option
-    this._wrapper = DC.DomUtil.create('div', 'dc-chart')
+    this._wrapper = DomUtil.create('div', 'dc-chart')
     this._setWrapperStyle()
     this._chart = undefined
-    this._state = 'initialized'
+    this._state = State.INITIALIZED
     this._show = true
   }
 
@@ -29,6 +31,10 @@ class Chart {
     return this._show
   }
 
+  /**
+   *
+   * @private
+   */
   _setWrapperStyle() {
     this._wrapper.style.position = 'absolute'
     this._wrapper.style.top = '0px'
@@ -37,6 +43,10 @@ class Chart {
     this._wrapper.setAttribute('id', this._id)
   }
 
+  /**
+   *
+   * @param viewer
+   */
   install(viewer) {
     if (viewer && this._state !== 'installed') {
       viewer.dcContainer.appendChild(this._wrapper)
@@ -44,14 +54,14 @@ class Chart {
       this._wrapper.style.height = viewer.canvas.height + 'px'
       if (echarts) {
         echarts.viewer = viewer
-        viewer.delegate.scene.canvas.setAttribute('tabIndex', 0)
+        viewer.scene.canvas.setAttribute('tabIndex', 0)
         this._chart = echarts.init(this._wrapper)
         if (this._option) {
           this._chart.setOption(this._option)
         }
       }
 
-      this._state = 'installed'
+      this._state = State.INSTALLED
     }
   }
 
