@@ -43,7 +43,7 @@
     "webpack-obfuscator": "^1.8.0"
   },
   "peerDependencies": {
-    "echarts": ">=4.0.0",
-    "@dvgis/dc-sdk": ">=1.8.0"
+    "@dvgis/dc-sdk": ">=1.8.0",
+    "echarts": ">=4.0.0"
   }
 }
