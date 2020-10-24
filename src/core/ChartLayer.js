@@ -3,17 +3,17 @@
  * @Date: 2020-02-02 15:59:37
  */
 
-const { State, DomUtil, Util } = DC
+const { State, DomUtil, Layer } = DC
 
-class Chart {
+class ChartLayer extends Layer {
   constructor(id, option) {
-    this._id = id || Util.uuid()
+    super(id)
     this._option = option
     this._wrapper = DomUtil.create('div', 'dc-chart')
     this._setWrapperStyle()
     this._chart = undefined
+    this.type = Layer.getLayerType('chart')
     this._state = State.INITIALIZED
-    this._show = true
   }
 
   get chart() {
@@ -47,7 +47,7 @@ class Chart {
    *
    * @param viewer
    */
-  install(viewer) {
+  _onAdd(viewer) {
     if (viewer && this._state !== 'installed') {
       viewer.dcContainer.appendChild(this._wrapper)
       this._wrapper.style.width = viewer.canvas.width + 'px'
@@ -60,11 +60,26 @@ class Chart {
           this._chart.setOption(this._option)
         }
       }
-
-      this._state = State.INSTALLED
+      this._state = State.ADDED
     }
   }
 
+  /**
+   *
+   * @private
+   */
+  _onRemove() {
+    if (this._wrapper && this._viewer) {
+      this._viewer.dcContainer.removeChild(this._wrapper)
+      this._state = State.REMOVED
+    }
+  }
+
+  /**
+   *
+   * @param option
+   * @returns {ChartLayer}
+   */
   setOption(option) {
     this._option = option
     this._chart && this._chart.setOption(this._option)
@@ -72,4 +87,6 @@ class Chart {
   }
 }
 
-export default Chart
+Layer.registerType('chart')
+
+export default ChartLayer

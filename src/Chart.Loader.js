@@ -5,6 +5,6 @@
 
 import './core/extension'
 
-import Chart from './core/Chart'
+import ChartLayer from './core/ChartLayer'
 
-DC.mixin({ Chart: Chart })
+DC.mixin({ ChartLayer })
