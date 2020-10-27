@@ -48,20 +48,17 @@ class ChartLayer extends Layer {
    * @param viewer
    */
   _onAdd(viewer) {
-    if (viewer && this._state !== 'installed') {
-      viewer.dcContainer.appendChild(this._wrapper)
-      this._wrapper.style.width = viewer.canvas.width + 'px'
-      this._wrapper.style.height = viewer.canvas.height + 'px'
-      if (echarts) {
-        echarts.viewer = viewer
-        viewer.scene.canvas.setAttribute('tabIndex', 0)
-        this._chart = echarts.init(this._wrapper)
-        if (this._option) {
-          this._chart.setOption(this._option)
-        }
-      }
-      this._state = State.ADDED
+    if (!viewer || !echarts) {
+      return
     }
+    this._wrapper.style.width = viewer.canvas.width + 'px'
+    this._wrapper.style.height = viewer.canvas.height + 'px'
+    viewer.dcContainer.appendChild(this._wrapper)
+    echarts.viewer = viewer
+    viewer.scene.canvas.setAttribute('tabIndex', 0)
+    this._chart = echarts.init(this._wrapper)
+    this._option && this._chart.setOption(this._option)
+    this._state = State.ADDED
   }
 
   /**
