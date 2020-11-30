@@ -51,6 +51,7 @@ class ChartLayer extends Layer {
     if (!viewer || !echarts) {
       return
     }
+    this._viewer = viewer
     this._wrapper.style.width = viewer.canvas.width + 'px'
     this._wrapper.style.height = viewer.canvas.height + 'px'
     viewer.dcContainer.appendChild(this._wrapper)
@@ -68,6 +69,7 @@ class ChartLayer extends Layer {
   _onRemove() {
     if (this._wrapper && this._viewer) {
       this._viewer.dcContainer.removeChild(this._wrapper)
+      this._chart.dispose()
       this._state = State.REMOVED
     }
   }

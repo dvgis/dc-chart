@@ -1,6 +1,6 @@
 {
   "name": "@dvgis/dc-chart",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "main": "index.js",
   "repository": "https://github.com/dvgis/dc-chart.git",
   "author": "Caven Chen <cavencj@gmail.com>",
